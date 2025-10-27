@@ -13,7 +13,7 @@ export default function HomePage() {
               AI4Counseling Lab
             </span>
           </a>
-          <nav className="hidden md:flex gap-6 text-sm">
+          <nav className="flex gap-6 text-sm">
             <a href="#about" className="hover:opacity-70">About</a>
             <a href="#research" className="hover:opacity-70">Research</a>
             <a href="#publications" className="hover:opacity-70">Publications</a>
