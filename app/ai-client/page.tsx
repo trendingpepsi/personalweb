@@ -175,7 +175,7 @@ export default function AIClientPage() {
       {/* Page heading */}
       <main className="mx-auto max-w-5xl px-1 py-3">
         <h1 className="text-2xl font-semibold">AI Simulated Client</h1>
-        <p className="mt-2 text-sm text-neutral-600">
+        <p className="mt-2 text-sm text-black">
           Educational prototype only. If you need help now, contact local services or (U.S.) call/text <b>988</b>.
         </p>
 
@@ -200,7 +200,7 @@ export default function AIClientPage() {
                       "inline-block max-w-[85%] rounded-2xl px-4 py-2 shadow-sm",
                       m.role === "user"
                         ? "bg-[#0021A5] text-white"
-                        : "bg-neutral-100 text-neutral-900",
+                        : "bg-neutral-100 text-black",
                     ].join(" ")}
                   >
                     {m.content}
