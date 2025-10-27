@@ -174,9 +174,9 @@ export default function AIClientPage() {
 
       {/* Page heading */}
       <main className="mx-auto max-w-5xl px-1 py-3">
-        <h1 className="text-2xl font-semibold">AI Simulated Client</h1>
+        <h1 className="text-2xl font-semibold">Preview of AI Simulated Client</h1>
         <p className="mt-2 text-sm text-black">
-          Educational prototype only. If you need help now, contact local services or (U.S.) call/text <b>988</b>.
+          Preview only. Not reflecting on the current project progress. If you experience counter-transference and need help now, contact local services or (U.S.) call/text <b>988</b>.
         </p>
 
         {/* Chat card */}
