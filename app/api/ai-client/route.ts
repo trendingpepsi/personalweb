@@ -1,9 +1,8 @@
 export const runtime = "edge";
 
-const RAW_MODEL = process.env.HF_MODEL || "meta-llama/Llama-3.3-70B-Instruct";
-// IMPORTANT: add provider suffix so the router knows which provider to use
-const PRIMARY_MODEL = `${RAW_MODEL}:hf-inference`;
-const FALLBACK_MODEL = "Qwen/Qwen2.5-7B-Instruct:hf-inference";
+// No provider suffix — let HF auto-select a provider
+const PRIMARY_MODEL = process.env.HF_MODEL || "meta-llama/Llama-3.3-70B-Instruct";
+const FALLBACK_MODEL = "Qwen/Qwen2.5-7B-Instruct";
 const HF_TOKEN = process.env.HF_TOKEN;
 
 type Msg = { role: "user" | "assistant"; content: string };
@@ -18,7 +17,7 @@ function toOpenAIMessages(history: Msg[]) {
 }
 
 async function chatComplete(model: string, messages: any[]) {
-  // OpenAI-compatible Inference Providers endpoint
+  // Correct OpenAI-compatible base URL (no /hf-inference in the path)
   const url = "https://router.huggingface.co/v1/chat/completions";
   return fetch(url, {
     method: "POST",
