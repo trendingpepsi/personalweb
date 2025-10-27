@@ -6,7 +6,7 @@ const HF_TOKEN = process.env.HF_TOKEN;
 
 function toPrompt(history: Array<{ role: string; content: string }>) {
   const system =
-    "You are a supportive, educational AI for a university counseling research site. " +
+    "You are a supportive, educational AI for a university counseling research lab, named AI4Counseling. " +
     "Do NOT provide medical/clinical advice. If asked, suggest contacting local services or 988 (U.S.). " +
     "Be concise and respectful.";
 
@@ -21,7 +21,7 @@ function toPrompt(history: Array<{ role: string; content: string }>) {
 }
 
 async function callHF(model: string, prompt: string) {
-  return fetch(`https://api-inference.huggingface.co/models/${encodeURIComponent(model)}`, {
+  return fetch(`https://router.huggingface.co/hf-inference/models/${encodeURIComponent(model)}`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${HF_TOKEN}`,
