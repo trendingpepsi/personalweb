@@ -1,18 +1,17 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-
 type Msg = { role: "user" | "assistant"; content: string };
 
 export default function AIClientPage() {
   const [messages, setMessages] = useState<Msg[]>([
-    { role: "assistant", content: "Hi! I’m the AI simulated client prototype. I can’t give clinical advice." },
+    { role: "assistant", content: "Hi! I’m the AI simulated client prototype. I can’t give clinical advice." }
   ]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
 
-  const bottomRef = useRef<HTMLDivElement | null>(null);
+  const bottomRef = useRef<HTMLDivElement|null>(null);
   useEffect(() => bottomRef.current?.scrollIntoView({ behavior: "smooth" }), [messages]);
 
   async function send() {
@@ -20,7 +19,6 @@ export default function AIClientPage() {
     if (!text) return;
     setErr(null);
 
-    // ✅ Keep the literal type for role
     const next: Msg[] = [...messages, { role: "user" as const, content: text }];
     setMessages(next);
     setInput("");
@@ -30,19 +28,17 @@ export default function AIClientPage() {
       const r = await fetch("/api/ai-client", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: next satisfies Msg[] }),
+        body: JSON.stringify({ messages: next }),
       });
-
       if (!r.ok) {
         const t = await r.text();
         throw new Error(t || `HTTP ${r.status}`);
       }
-
-      const data = (await r.json()) as { reply?: string };
-      const reply = data.reply ?? "…";
+      const data = await r.json();
+      const reply = data.reply || "…";
       setMessages([...next, { role: "assistant", content: reply }]);
-    } catch (e) {
-      setErr("Server not configured or unavailable.");
+    } catch (e: any) {
+      setErr(String(e?.message || e));
       setMessages([...next, { role: "assistant", content: "Sorry, I couldn't respond just now." }]);
     } finally {
       setBusy(false);
@@ -52,7 +48,7 @@ export default function AIClientPage() {
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      if (!busy && input.trim()) void send();
+      if (!busy && input.trim()) send();
     }
   }
 
@@ -70,7 +66,9 @@ export default function AIClientPage() {
               <div
                 className={
                   "inline-block max-w-[85%] rounded-xl px-3 py-2 " +
-                  (m.role === "user" ? "bg-[#0021A5] text-white" : "bg-neutral-100 text-neutral-900")
+                  (m.role === "user"
+                    ? "bg-[#0021A5] text-white"
+                    : "bg-neutral-100 text-neutral-900")
                 }
               >
                 {m.content}
@@ -82,7 +80,7 @@ export default function AIClientPage() {
               <div className="inline-block rounded-xl px-3 py-2 bg-neutral-100">…</div>
             </div>
           )}
-          {err && <div className="text-red-600 text-xs">{err}</div>}
+          {err && <div className="text-red-600 text-xs whitespace-pre-wrap">{err}</div>}
           <div ref={bottomRef} />
         </div>
 
