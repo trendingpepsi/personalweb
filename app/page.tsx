@@ -132,7 +132,7 @@ export default function HomePage() {
           <div className="mt-8 grid sm:grid-cols-1 gap-6">
             <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
               <h3 className="font-semibold">
-                Interact with a simulated counseling client powered by our prototype models.
+                Preview of a simulated counseling client powered by one of our early prototypes.
               </h3>
               <a
                 href="/ai-client"
