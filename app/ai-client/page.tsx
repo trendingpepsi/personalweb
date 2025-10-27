@@ -125,7 +125,7 @@ export default function AIClientPage() {
       </header>
 
       {/* Page heading */}
-      <main className="mx-auto max-w-5xl px-2 py-4">
+      <main className="mx-auto max-w-5xl px-1 py-3">
         <h1 className="text-3xl font-semibold">AI Simulated Client</h1>
         <p className="mt-2 text-sm text-neutral-600">
           Educational prototype only. If you need help now, contact local services or (U.S.) call/text <b>988</b>.
