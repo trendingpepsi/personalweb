@@ -31,13 +31,12 @@ export default function SiteHeader() {
         <nav className="hidden md:flex gap-6 text-sm">
           <a href="#about" className="hover:opacity-70">About</a>
           <a href="#research" className="hover:opacity-70">Research</a>
-          <a href="#ai-client" className="hover:opacity-70">Try AI Simulated Client</a>
           <a href="#publications" className="hover:opacity-70">Publications</a>
           <a
             href="/ai-client"
             className="hover:opacity-80 transition-opacity inline-flex items-center gap-2"
-            aria-label="Try the AI simulated client"
-            title="Try the AI simulated client"
+            aria-label="Try AI simulation"
+            title="Try AI simulation"
           >
             {/* simple star-ish icon */}
             <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" className="fill-current">
