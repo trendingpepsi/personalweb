@@ -9,7 +9,7 @@ export default function HomePage() {
       <header className="sticky top-0 z-50 bg-white/70 backdrop-blur border-b border-neutral-200">
         <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
           <a href="#top" className="font-semibold tracking-tight inline-block">
-            <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 shadow-sm ring-1 ring-black/5 bg-[#FA4616] text-white">
+            <span className="inline-flex items-center gap-2 rounded-full px-6 py-2 shadow-sm ring-1 ring-black/5 bg-[#FA4616] text-white">
               AI4Counseling Lab
             </span>
           </a>
@@ -26,7 +26,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl px-4 py-16 grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
           <div className="md:col-span-2">
             <h1 className="text-3xl md:text-5xl font-bold leading-tight text-[#0021A5]">
-              Hi, I’m <span>Yusen Zhai</span>
+              Yusen Zhai, PhD
             </h1>
             <p className="mt-4 text-neutral-700 text-lg">
               Assistant Professor at University of Florida • Counselor Education • AI & Mental Health
