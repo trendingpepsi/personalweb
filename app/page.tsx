@@ -1,31 +1,12 @@
 import Image from "next/image";
 import { ArticleCard } from "@/components/ArticleCard";
 import { Pub } from "@/components/Pub";
+import SiteHeader from "@/components/SiteHeader";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen">
-      {/* Header / Nav */}
-      <header className="sticky top-0 z-50 bg-white/70 backdrop-blur border-b border-neutral-200">
-        <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
-          <a href="#top" className="font-semibold tracking-tight inline-block">
-            <span className="inline-flex items-center gap-2 rounded-full px-6 py-2 shadow-sm ring-1 ring-black/5 bg-[#FA4616] text-white">
-              AI4Counseling Lab
-            </span>
-          </a>
-          <nav className="flex gap-6 text-sm">
-            <a href="#about" className="hover:opacity-70">About</a>
-            <a href="#research" className="hover:opacity-70">Research</a>
-            <a href="#publications" className="hover:opacity-70">Publications</a>
-            <a href="/ai-client" className="hover:opacity-80 transition-opacity inline-flex items-center gap-2">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M12 2l1.8 3.8L18 8l-4.2 2.2L12 14l-1.8-3.8L6 8l4.2-2.2L12 2zm6 10l1.2 2.4L22 16l-2.8 1.6L18 20l-1.2-2.4L14 16l2.8-1.6L18 12zm-12 0l1.2 2.4L10 16l-2.8 1.6L6 20l-1.2-2.4L2 16l2.8-1.6L6 12z"/>
-              </svg>
-              <span>Try the AI simulated client</span>
-              </a>
-          </nav>
-        </div>
-      </header>
+    <main className="min-h-screen text-black">
+      <SiteHeader /> {/* ← new mobile-friendly header */}
 
       {/* Hero */}
       <section id="top" className="bg-gradient-to-b from-white to-neutral-50">
