@@ -31,7 +31,7 @@ export default function SiteHeader() {
         <nav className="hidden md:flex gap-6 text-sm">
           <a href="#about" className="hover:opacity-70">About</a>
           <a href="#research" className="hover:opacity-70">Research</a>
-          <a href="#ai-client" className="hover:opacity-70">AI Simulated Client</a>
+          <a href="#ai-client" className="hover:opacity-70">Try AI Simulated Client</a>
           <a href="#publications" className="hover:opacity-70">Publications</a>
           <a
             href="/ai-client"
