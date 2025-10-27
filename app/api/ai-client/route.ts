@@ -14,7 +14,7 @@ function toOpenAIMessages(history: Msg[]) {
 }
 
 async function callHFChat(model: string, messages: any[]) {
-  const url = "https://router.huggingface.co/hf-inference/v1/chat/completions";
+  const url = "https://router.huggingface.co/hf-inference/models/${encodeURIComponent(model)}";
   const r = await fetch(url, {
     method: "POST",
     headers: {
