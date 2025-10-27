@@ -176,7 +176,7 @@ export default function AIClientPage() {
       <main className="mx-auto max-w-5xl px-1 py-3">
         <h1 className="text-2xl font-semibold">AI Simulated Client</h1>
         <p className="mt-2 text-sm text-black">
-          Preview only.
+          Preview only with limited function.
         </p>
 
         {/* Chat card */}
