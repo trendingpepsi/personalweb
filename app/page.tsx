@@ -17,6 +17,12 @@ export default function HomePage() {
             <a href="#about" className="hover:opacity-70">About</a>
             <a href="#research" className="hover:opacity-70">Research</a>
             <a href="#publications" className="hover:opacity-70">Publications</a>
+            <a href="/ai-client" className="hover:opacity-80 transition-opacity inline-flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2l1.8 3.8L18 8l-4.2 2.2L12 14l-1.8-3.8L6 8l4.2-2.2L12 2zm6 10l1.2 2.4L22 16l-2.8 1.6L18 20l-1.2-2.4L14 16l2.8-1.6L18 12zm-12 0l1.2 2.4L10 16l-2.8 1.6L6 20l-1.2-2.4L2 16l2.8-1.6L6 12z"/>
+              </svg>
+              <span>Try the AI simulated client</span>
+              </a>
           </nav>
         </div>
       </header>
@@ -193,6 +199,30 @@ export default function HomePage() {
               />
             </li>
           </ul>
+        </div>
+      </section>
+            {/* AI Simulated Client */}
+      <section id="ai-client" className="py-16 border-t border-neutral-200">
+        <div className="mx-auto max-w-6xl px-4">
+          <h2 className="text-2xl font-semibold">AI Simulated Client</h2>
+          <div
+            className="mt-2 h-1 w-12 rounded-full"
+            style={{ background: "linear-gradient(90deg,#0021A5,#FA4616)" }}
+          />
+          <div className="mt-8 grid sm:grid-cols-1 gap-6">
+            <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
+              <h3 className="font-semibold">
+                Interact with a simulated counseling client powered by our prototype models.
+              </h3>
+              <a
+                href="/ai-client"
+                className="mt-4 inline-flex items-center gap-2 rounded-xl px-4 py-2 text-white"
+                style={{ background: "linear-gradient(135deg,#0021A5,#FA4616)" }}
+              >
+                Click here to start
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 
