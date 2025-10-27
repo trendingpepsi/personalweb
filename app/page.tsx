@@ -9,8 +9,8 @@ export default function HomePage() {
       <header className="sticky top-0 z-50 bg-white/70 backdrop-blur border-b border-neutral-200">
         <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
           <a href="#top" className="font-semibold tracking-tight inline-block">
-            <span className="inline-flex items-center gap-2 rounded-full px-3 py-1 shadow-sm ring-1 ring-black/5 bg-[#FA4616] text-white">
-              AI4Counseling
+            <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 shadow-sm ring-1 ring-black/5 bg-[#FA4616] text-white">
+              AI4Counseling Lab
             </span>
           </a>
           <nav className="hidden md:flex gap-6 text-sm">
