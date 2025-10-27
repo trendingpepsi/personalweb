@@ -1,21 +1,26 @@
 export const runtime = "edge";
 
-const PRIMARY_MODEL = process.env.HF_MODEL || "meta-llama/Llama-3.3-70B-Instruct";
-const FALLBACK_MODEL = "Qwen/Qwen2.5-7B-Instruct";
+const RAW_MODEL = process.env.HF_MODEL || "meta-llama/Llama-3.3-70B-Instruct";
+// IMPORTANT: add provider suffix so the router knows which provider to use
+const PRIMARY_MODEL = `${RAW_MODEL}:hf-inference`;
+const FALLBACK_MODEL = "Qwen/Qwen2.5-7B-Instruct:hf-inference";
 const HF_TOKEN = process.env.HF_TOKEN;
 
 type Msg = { role: "user" | "assistant"; content: string };
 
 function toOpenAIMessages(history: Msg[]) {
   const system =
-    "You are a supportive, educational AI for a university counseling research site. Do NOT provide medical/clinical advice. If asked, suggest contacting local services or 988 (U.S.). Be concise and respectful.";
+    "You are a supportive, educational AI for a university counseling research site. " +
+    "Do NOT provide medical/clinical advice. If asked, suggest contacting local services or 988 (U.S.). " +
+    "Be concise and respectful.";
   const trimmed = (history || []).slice(-20);
   return [{ role: "system" as const, content: system }, ...trimmed];
 }
 
-async function callHFChat(model: string, messages: any[]) {
-  const url = 'https://router.huggingface.co/hf-inference/models/${encodeURIComponent(model)}';
-  const r = await fetch(url, {
+async function chatComplete(model: string, messages: any[]) {
+  // OpenAI-compatible Inference Providers endpoint
+  const url = "https://router.huggingface.co/v1/chat/completions";
+  return fetch(url, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${HF_TOKEN}`,
@@ -29,7 +34,6 @@ async function callHFChat(model: string, messages: any[]) {
       stream: false,
     }),
   });
-  return r;
 }
 
 export async function POST(req: Request) {
@@ -40,19 +44,25 @@ export async function POST(req: Request) {
     const { messages } = (await req.json()) as { messages: Msg[] };
     const oaMsgs = toOpenAIMessages(messages || []);
 
-    let resp = await callHFChat(PRIMARY_MODEL, oaMsgs);
+    // Try primary (Llama 3.3 70B via HF Inference)
+    let resp = await chatComplete(PRIMARY_MODEL, oaMsgs);
+
+    // Auto-fallback if the primary is not routable (403/404)
     if (resp.status === 403 || resp.status === 404) {
-      resp = await callHFChat(FALLBACK_MODEL, oaMsgs);
+      resp = await chatComplete(FALLBACK_MODEL, oaMsgs);
     }
+
     if (!resp.ok) {
       const body = await resp.text();
       return new Response(`HF error ${resp.status}: ${body}`, { status: 500 });
     }
+
     const data = await resp.json();
     const reply =
       data?.choices?.[0]?.message?.content ??
       data?.choices?.[0]?.delta?.content ??
       "";
+
     return Response.json({ reply });
   } catch (e: any) {
     return new Response(`Server exception: ${e?.message || String(e)}`, { status: 500 });
