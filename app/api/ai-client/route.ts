@@ -1,74 +1,75 @@
 export const runtime = "edge";
 
+// Primary = Llama 3.3 70B; Fallback = Qwen 2.5 7B
 const PRIMARY_MODEL = process.env.HF_MODEL || "meta-llama/Llama-3.3-70B-Instruct";
 const FALLBACK_MODEL = "Qwen/Qwen2.5-7B-Instruct";
 const HF_TOKEN = process.env.HF_TOKEN;
 
-function toPrompt(history: Array<{ role: string; content: string }>) {
+type Msg = { role: "user" | "assistant"; content: string };
+
+function toOpenAIMessages(history: Msg[]) {
   const system =
-    "You are a supportive, educational AI for a university counseling research lab, named AI4Counseling. " +
+    "You are a supportive, educational AI for a university counseling research site. " +
     "Do NOT provide medical/clinical advice. If asked, suggest contacting local services or 988 (U.S.). " +
     "Be concise and respectful.";
 
   const trimmed = (history || []).slice(-20);
-  const lines = [`SYSTEM: ${system}`];
-  for (const m of trimmed) {
-    const role = m.role?.toUpperCase() === "USER" ? "USER" : "ASSISTANT";
-    lines.push(`${role}: ${m.content}`);
-  }
-  lines.push("ASSISTANT:");
-  return lines.join("\n");
+  return [{ role: "system" as const, content: system }, ...trimmed];
 }
 
-async function callHF(model: string, prompt: string) {
-  return fetch(`https://router.huggingface.co/hf-inference/models/${encodeURIComponent(model)}`, {
+async function callHFChat(model: string, messages: any[]) {
+  // New Inference Providers (OpenAI-compatible) endpoint:
+  // https://router.huggingface.co/hf-inference/v1/chat/completions
+  const url = "https://router.huggingface.co/hf-inference/v1/chat/completions";
+  const r = await fetch(url, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${HF_TOKEN}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      inputs: prompt,
-      parameters: {
-        max_new_tokens: 800,
-        temperature: 0.6,
-        return_full_text: false,
-      },
+      model,
+      messages,
+      max_tokens: 800,
+      temperature: 0.6,
+      stream: false,
     }),
   });
+  return r;
 }
 
 export async function POST(req: Request) {
   try {
     if (!HF_TOKEN) {
-      return new Response("Server is not configured (missing HF_TOKEN).", { status: 500 });
+      return new Response("Missing HF_TOKEN env var on server.", { status: 500 });
     }
 
-    const { messages } = (await req.json()) as {
-      messages: Array<{ role: "user" | "assistant"; content: string }>;
-    };
+    const { messages } = (await req.json()) as { messages: Msg[] };
+    const oaMsgs = toOpenAIMessages(messages || []);
 
-    const prompt = toPrompt(messages);
+    // Try primary (Llama 3.3 70B)
+    let resp = await callHFChat(PRIMARY_MODEL, oaMsgs);
 
-    let r = await callHF(PRIMARY_MODEL, prompt);
-    if (r.status === 403 || r.status === 404) {
-      r = await callHF(FALLBACK_MODEL, prompt);
+    // If access/rate/model errors, fall back to Qwen
+    if (resp.status === 403 || resp.status === 404) {
+      resp = await callHFChat(FALLBACK_MODEL, oaMsgs);
     }
 
-    if (!r.ok) {
-      const msg = await r.text();
-      return new Response(`HF error (${r.status}): ${msg}`, { status: 500 });
+    if (!resp.ok) {
+      const body = await resp.text();
+      // Return the error body to the client so you can see what's wrong
+      return new Response(`HF error ${resp.status}: ${body}`, { status: 500 });
     }
 
-    const data = await r.json();
+    const data = await resp.json();
+    // OpenAI-style response: { choices: [ { message: { content: "..." } } ] }
     const reply =
-      (Array.isArray(data) && data[0]?.generated_text) ||
-      data?.generated_text ||
-      data?.[0]?.generated_text ||
+      data?.choices?.[0]?.message?.content ??
+      data?.choices?.[0]?.delta?.content ?? // just in case
       "";
 
     return Response.json({ reply });
   } catch (e: any) {
-    return new Response(`Server error: ${e?.message || String(e)}`, { status: 500 });
+    return new Response(`Server exception: ${e?.message || String(e)}`, { status: 500 });
   }
 }
