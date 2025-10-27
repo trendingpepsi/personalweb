@@ -8,7 +8,7 @@ type Msg = { role: "user" | "assistant"; content: string };
 const GREETING: Msg = {
   role: "assistant",
   content:
-    "Hi! I’m the AI simulated client. Please tell me how you would like us to start our simulated counseling session.",
+    "Hi! I’m the AI simulated client. Hope you are ready for a simulated counseling session. What kind of real-world client issues you want to practice?",
 };
 
 export default function AIClientPage() {
@@ -180,7 +180,7 @@ export default function AIClientPage() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={onKeyDown}
-                placeholder='Try: "I want to practice my assessment skills with a client with depression"'
+                placeholder='Try: "Client with depression"'
                 className="flex-1 rounded-full border border-neutral-300 px-4 py-2 text-sm outline-none transition focus:ring-2 focus:ring-[#0021A5]/30"
               />
               <button
