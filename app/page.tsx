@@ -34,10 +34,10 @@ export default function HomePage() {
             <h1 className="text-3xl md:text-5xl font-bold leading-tight text-[#0021A5]">
               Yusen Zhai, PhD
             </h1>
-            <p className="mt-4 text-neutral-700 text-lg">
+            <p className="mt-4 text-black text-lg">
               Assistant Professor at University of Florida • Counselor Education • AI & Mental Health
             </p>
-            <p className="mt-4 text-neutral-700 max-w-2xl">
+            <p className="mt-4 text-black max-w-2xl">
               I study how AI can augment counseling and psychotherapy practice and counselor training to improve client mental health and student learning outcomes. My work bridges counseling practice, machine learning, and health policy.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-3">
