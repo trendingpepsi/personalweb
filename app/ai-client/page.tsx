@@ -5,6 +5,44 @@ import { useRouter } from "next/navigation";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
+// Tunables for bubble sizing/pace
+const BUBBLE_MAX_CHARS = 220;     // wrap around ~2–3 short sentences per bubble
+const BUBBLE_DELAY_MS = 350;      // delay between bubbles for readability
+
+function splitIntoBubbles(text: string): string[] {
+  // Normalize whitespace and split by sentence enders.
+  const sentences = text
+    .replace(/\s+/g, " ")
+    .trim()
+    .split(/(?<=[.!?])\s+/);
+
+  const bubbles: string[] = [];
+  let current = "";
+
+  for (const s of sentences) {
+    // If adding this sentence would exceed the target, push current and start a new one.
+    if ((current + (current ? " " : "") + s).length > BUBBLE_MAX_CHARS) {
+      if (current) bubbles.push(current);
+      current = s;
+    } else {
+      current = current ? `${current} ${s}` : s;
+    }
+  }
+  if (current) bubbles.push(current);
+
+  // Fallback: no sentence boundaries → chunk by length
+  if (!bubbles.length && text.length > BUBBLE_MAX_CHARS) {
+    for (let i = 0; i < text.length; i += BUBBLE_MAX_CHARS) {
+      bubbles.push(text.slice(i, i + BUBBLE_MAX_CHARS));
+    }
+  }
+  return bubbles.length ? bubbles : [text];
+}
+
+// Small helper to pause between bubbles
+const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
+
 const GREETING: Msg = {
   role: "assistant",
   content:
@@ -48,9 +86,19 @@ export default function AIClientPage() {
         const t = await r.text();
         throw new Error(t || `HTTP ${r.status}`);
       }
-      const data = (await r.json()) as { reply?: string };
-      const reply = data.reply || "…";
-      setMessages([...next, { role: "assistant", content: reply }]);
+        const data = (await r.json()) as { reply?: string };
+        const reply = (data.reply || "…").trim();
+        
+        // Split into several bubbles and append them one by one with a slight delay
+        const chunks = splitIntoBubbles(reply);
+        
+        // we already appended the user message in `next`
+        // now add assistant bubbles progressively
+        for (let i = 0; i < chunks.length; i++) {
+          setMessages((prev) => [...prev, { role: "assistant", content: chunks[i] }]);
+          if (i < chunks.length - 1) await delay(BUBBLE_DELAY_MS);
+        }
+
     } catch (e: any) {
       setErr(String(e?.message || e));
       setMessages([
