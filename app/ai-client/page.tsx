@@ -8,7 +8,7 @@ type Msg = { role: "user" | "assistant"; content: string };
 const GREETING: Msg = {
   role: "assistant",
   content:
-    "Hi! I’m the AI simulated client prototype. I can’t give clinical advice.",
+    "Hi! I’m the AI simulated client. Please tell me how you would like us to start our simulated counseling session.",
 };
 
 export default function AIClientPage() {
@@ -125,7 +125,7 @@ export default function AIClientPage() {
       </header>
 
       {/* Page heading */}
-      <main className="mx-auto max-w-5xl px-4 py-8">
+      <main className="mx-auto max-w-5xl px-2 py-4">
         <h1 className="text-3xl font-semibold">AI Simulated Client</h1>
         <p className="mt-2 text-sm text-neutral-600">
           Educational prototype only. If you need help now, contact local services or (U.S.) call/text <b>988</b>.
@@ -180,7 +180,7 @@ export default function AIClientPage() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={onKeyDown}
-                placeholder='Try: "Summarize a recent publication."'
+                placeholder='Try: "I want to practice my assessment skills with a client with depression"'
                 className="flex-1 rounded-full border border-neutral-300 px-4 py-2 text-sm outline-none transition focus:ring-2 focus:ring-[#0021A5]/30"
               />
               <button
