@@ -42,7 +42,7 @@ export default function SiteHeader() {
             <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" className="fill-current">
               <path d="M12 2l1.8 3.8L18 8l-4.2 2.2L12 14l-1.8-3.8L6 8l4.2-2.2L12 2zm6 10l1.2 2.4L22 16l-2.8 1.6L18 20l-1.2-2.4L14 16l2.8-1.6L18 12zm-12 0l1.2 2.4L10 16l-2.8 1.6L6 20l-1.2-2.4L2 16l2.8-1.6L6 12z"/>
             </svg>
-            <span>Try the AI simulated client</span>
+            <span>Try AI simulation</span>
           </a>
         </nav>
 
@@ -125,7 +125,7 @@ export default function SiteHeader() {
                 className="block rounded-lg px-3 py-2 hover:bg-neutral-100"
                 onClick={() => setOpen(false)}
               >
-                Try the AI simulated client
+                Try AI simulation
               </a>
             </li>
           </ul>
