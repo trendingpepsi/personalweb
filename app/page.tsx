@@ -121,6 +121,32 @@ export default function HomePage() {
         </div>
       </section>
 
+            {/* AI Simulated Client */}
+      <section id="ai-client" className="py-16 border-t border-neutral-200">
+        <div className="mx-auto max-w-6xl px-4">
+          <h2 className="text-2xl font-semibold">AI Simulated Client</h2>
+          <div
+            className="mt-2 h-1 w-12 rounded-full"
+            style={{ background: "linear-gradient(90deg,#0021A5,#FA4616)" }}
+          />
+          <div className="mt-8 grid sm:grid-cols-1 gap-6">
+            <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
+              <h3 className="font-semibold">
+                Interact with a simulated counseling client powered by our prototype models.
+              </h3>
+              <a
+                href="/ai-client"
+                className="mt-4 inline-flex items-center gap-2 rounded-xl px-4 py-2 text-white"
+                style={{ background: "linear-gradient(135deg,#0021A5,#FA4616)" }}
+              >
+                Click here to start
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
       {/* Publications */}
       <section id="publications" className="py-16 border-t border-neutral-200">
         <div className="mx-auto max-w-6xl px-4">
@@ -201,38 +227,10 @@ export default function HomePage() {
           </ul>
         </div>
       </section>
-            {/* AI Simulated Client */}
-      <section id="ai-client" className="py-16 border-t border-neutral-200">
-        <div className="mx-auto max-w-6xl px-4">
-          <h2 className="text-2xl font-semibold">AI Simulated Client</h2>
-          <div
-            className="mt-2 h-1 w-12 rounded-full"
-            style={{ background: "linear-gradient(90deg,#0021A5,#FA4616)" }}
-          />
-          <div className="mt-8 grid sm:grid-cols-1 gap-6">
-            <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
-              <h3 className="font-semibold">
-                Interact with a simulated counseling client powered by our prototype models.
-              </h3>
-              <a
-                href="/ai-client"
-                className="mt-4 inline-flex items-center gap-2 rounded-xl px-4 py-2 text-white"
-                style={{ background: "linear-gradient(135deg,#0021A5,#FA4616)" }}
-              >
-                Click here to start
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <footer className="py-10 border-t border-neutral-200">
         <div className="mx-auto max-w-6xl px-4 text-sm text-neutral-600 flex flex-col md:flex-row items-center justify-between gap-2">
           <p>© {new Date().getFullYear()} Yusen Zhai</p>
-          <p>
-            Built with <a className="underline" href="https://nextjs.org">Next.js</a> &{" "}
-            <a className="underline" href="https://tailwindcss.com">Tailwind CSS</a>
-          </p>
         </div>
       </footer>
     </main>
