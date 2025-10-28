@@ -52,8 +52,7 @@ export async function POST(req: Request) {
       },
       body: JSON.stringify({
         model: OPENAI_MODEL,
-        // Responses API accepts `messages` directly (or `input`)
-        messages: msgs,
+      + input: msgs,                 
         temperature: TEMP,
         max_output_tokens: 800
       }),
