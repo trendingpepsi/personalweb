@@ -1,8 +1,9 @@
 // app/api/ai-client/route.ts
 export const runtime = "edge";
 
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY!;
 const OPENAI_MODEL = process.env.OPENAI_MODEL || "gpt-4o-mini";
+const TEMP = Number(process.env.OPENAI_TEMP ?? 0.8);
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -31,47 +32,41 @@ function toOpenAIMessages(history: Msg[]) {
   return [{ role: "system" as const, content: system }, ...trimmed];
 }
 
-async function chatCompleteOpenAI(messages: any[]) {
-  if (!OPENAI_API_KEY) {
-    return new Response("Missing OPENAI_API_KEY env var on server.", {
-      status: 500,
-    });
-  }
-
-  const url = "https://api.openai.com/v1/chat/completions";
-  return fetch(url, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${OPENAI_API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: OPENAI_MODEL,
-      messages,
-      max_tokens: 800,
-      temperature: Number(process.env.HF_TEMP ?? 0.8),
-      stream: false,
-    }),
-  });
-}
-
 export async function POST(req: Request) {
   try {
-    const { messages } = (await req.json()) as { messages: Msg[] };
-    const oaMsgs = toOpenAIMessages(messages || []);
+    if (!OPENAI_API_KEY) {
+      return new Response("Missing OPENAI_API_KEY", { status: 500 });
+    }
 
-    const resp = await chatCompleteOpenAI(oaMsgs);
+    const { messages } = (await req.json()) as { messages: Msg[] };
+    const msgs = toOpenAIMessages(messages || []);
+
+    // ---- Responses API (unified) ----
+    const resp = await fetch("https://api.openai.com/v1/responses", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: OPENAI_MODEL,
+        // Responses API accepts `messages` directly (or `input`)
+        messages: msgs,
+        temperature: TEMP,
+        max_output_tokens: 800
+      }),
+    });
+
     if (!resp.ok) {
       const body = await resp.text();
-      return new Response(`OpenAI error ${resp.status}: ${body}`, {
-        status: 500,
-      });
+      return new Response(`OpenAI error ${resp.status}: ${body}`, { status: 500 });
     }
 
     const data = await resp.json();
+    // Simplest way to extract text from Responses API:
     const reply =
-      data?.choices?.[0]?.message?.content ??
-      data?.choices?.[0]?.delta?.content ??
+      (data.output_text as string)?.trim() ||
+      data.output?.[0]?.content?.[0]?.text?.trim() ||
       "";
 
     return Response.json({ reply });
