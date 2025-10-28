@@ -228,7 +228,7 @@ export default function AIClientPage() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={onKeyDown}
-                placeholder='Try: "Client with depression"'
+                placeholder='Type your response here.'
                 className="flex-1 rounded-full border border-neutral-300 px-4 py-2 text-sm outline-none transition focus:ring-2 focus:ring-[#0021A5]/30"
               />
               <button
