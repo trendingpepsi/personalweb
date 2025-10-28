@@ -52,7 +52,7 @@ export async function POST(req: Request) {
       },
       body: JSON.stringify({
         model: OPENAI_MODEL,
-      + input: msgs,                 
+        input: msgs,                 
         temperature: TEMP,
         max_output_tokens: 800
       }),
