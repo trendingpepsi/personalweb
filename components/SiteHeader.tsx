@@ -95,7 +95,7 @@ export default function SiteHeader() {
             <li>
               <a
                 href="#research"
-                className="block rounded-lg px-3 py-2 hover:bg-white/10"
+                className="block rounded-lg px-3 py-2 font-semibold hover:bg-white/10"
                 onClick={() => setOpen(false)}
               >
                 Research
@@ -104,7 +104,7 @@ export default function SiteHeader() {
             <li>
               <a
                 href="#publications"
-                className="block rounded-lg px-3 py-2 hover:bg-white/10"
+                className="block rounded-lg px-3 py-2 font-semibold hover:bg-white/10"
                 onClick={() => setOpen(false)}
               >
                 Publications
@@ -113,7 +113,7 @@ export default function SiteHeader() {
             <li className="pt-1">
               <a
                 href="/ai-client"
-                className="block rounded-lg px-3 py-2 hover:bg-white/10"
+                className="block rounded-lg px-3 py-2 font-semibold hover:bg-white/10"
                 onClick={() => setOpen(false)}
               >
                 Try AI simulation
