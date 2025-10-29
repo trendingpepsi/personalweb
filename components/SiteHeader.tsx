@@ -29,12 +29,12 @@ export default function SiteHeader() {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex gap-6 text-sm">
-          <a href="#about" className="hover:opacity-70">About</a>
-          <a href="#research" className="hover:opacity-70">Research</a>
-          <a href="#publications" className="hover:opacity-70">Publications</a>
+          <a href="#about" className="font-semibold hover:opacity-70">About</a>
+          <a href="#research" className="font-semibold hover:opacity-70">Research</a>
+          <a href="#publications" className="font-semibold hover:opacity-70">Publications</a>
           <a
             href="/ai-client"
-            className="hover:opacity-80 transition-opacity inline-flex items-center gap-2"
+            className="font-semibold hover:opacity-80 transition-opacity inline-flex items-center gap-2"
             aria-label="Try AI simulation"
             title="Try AI simulation"
           >
@@ -86,7 +86,7 @@ export default function SiteHeader() {
             <li>
               <a
                 href="#about"
-                className="block rounded-lg px-3 py-2 hover:bg-white/10"
+                className="block rounded-lg px-3 py-2 font-semibold hover:bg-white/10"
                 onClick={() => setOpen(false)}
               >
                 About
