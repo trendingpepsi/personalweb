@@ -15,8 +15,8 @@ export default function SiteHeader() {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-neutral-200/70 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-      <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+    <header className="sticky top-0 z-50" style={{ backgroundColor: "#5374A6" }}>
+      <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between text-white">
         {/* Brand */}
         <a href="#top" className="font-semibold tracking-tight inline-block">
           <span
@@ -49,7 +49,7 @@ export default function SiteHeader() {
         {/* Mobile hamburger */}
         <button
           type="button"
-          className="md:hidden inline-flex items-center justify-center rounded-lg p-2 ring-1 ring-black/5 hover:bg-neutral-100"
+          className="md:hidden inline-flex items-center justify-center rounded-lg p-2 ring-1 ring-white/20 hover:bg-white/10 text-white"
           aria-label="Open menu"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -99,15 +99,6 @@ export default function SiteHeader() {
                 onClick={() => setOpen(false)}
               >
                 Research
-              </a>
-            </li>
-            <li>
-              <a
-                href="#ai-client"
-                className="block rounded-lg px-3 py-2 hover:bg-neutral-100"
-                onClick={() => setOpen(false)}
-              >
-                AI Simulated Client
               </a>
             </li>
             <li>
