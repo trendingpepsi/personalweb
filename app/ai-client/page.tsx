@@ -2,6 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import SiteHeader from "@/components/SiteHeader";
+
+export default function AIClientPage() {
+  // ...
+  return (
+    <>
+      <SiteHeader />
+      <main className="mx-auto max-w-5xl px-1 py-3">
+        {/* ... */}
+      </main>
+    </>
+  );
+}
+
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -137,40 +151,7 @@ export default function AIClientPage() {
         />
       </div>
 
-      {/* Top bar with brand + actions */}
-      <header className="sticky top-0 z-50 border-b border-neutral-200/70 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
-          {/* Brand chip (same style as main site) */}
-          <div
-            className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm font-semibold text-white shadow-sm ring-1 ring-black/5"
-            style={{ background: "#FA4616" }}
-          >
-            AI4Counseling Lab
-          </div>
 
-          <div className="flex gap-2">
-            <button
-              onClick={() => router.push("/")}
-              className="rounded-xl border border-neutral-300 bg-white px-3 py-2 text-sm shadow-sm transition hover:bg-neutral-50"
-              aria-label="Back to homepage"
-              title="Back to homepage"
-            >
-              ← Back
-            </button>
-            <button
-              onClick={resetChat}
-              className="rounded-xl px-3 py-2 text-sm text-white transition disabled:opacity-50"
-              style={{
-                background: "linear-gradient(135deg,#0021A5,#FA4616)",
-              }}
-              aria-label="Restart chat"
-              title="Restart chat"
-            >
-              Restart chat
-            </button>
-          </div>
-        </div>
-      </header>
 
       {/* Page heading */}
       <main className="mx-auto max-w-5xl px-1 py-3">
