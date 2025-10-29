@@ -81,12 +81,12 @@ export default function SiteHeader() {
       <div
         className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-300 ${open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}
       >
-        <nav className="mx-auto max-w-6xl px-4 pb-3 pt-1">
+        <nav className="mx-auto max-w-6xl px-4 pb-3 pt-1 text-white">
           <ul className="space-y-1 text-sm">
             <li>
               <a
                 href="#about"
-                className="block rounded-lg px-3 py-2 hover:bg-neutral-100"
+                className="block rounded-lg px-3 py-2 hover:bg-white/10"
                 onClick={() => setOpen(false)}
               >
                 About
@@ -95,7 +95,7 @@ export default function SiteHeader() {
             <li>
               <a
                 href="#research"
-                className="block rounded-lg px-3 py-2 hover:bg-neutral-100"
+                className="block rounded-lg px-3 py-2 hover:bg-white/10"
                 onClick={() => setOpen(false)}
               >
                 Research
@@ -104,7 +104,7 @@ export default function SiteHeader() {
             <li>
               <a
                 href="#publications"
-                className="block rounded-lg px-3 py-2 hover:bg-neutral-100"
+                className="block rounded-lg px-3 py-2 hover:bg-white/10"
                 onClick={() => setOpen(false)}
               >
                 Publications
@@ -113,7 +113,7 @@ export default function SiteHeader() {
             <li className="pt-1">
               <a
                 href="/ai-client"
-                className="block rounded-lg px-3 py-2 hover:bg-neutral-100"
+                className="block rounded-lg px-3 py-2 hover:bg-white/10"
                 onClick={() => setOpen(false)}
               >
                 Try AI simulation
