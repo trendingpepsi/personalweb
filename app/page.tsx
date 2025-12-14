@@ -16,7 +16,7 @@ export default function HomePage() {
               Yusen Zhai, PhD
             </h1>
             <p className="mt-4 text-black text-lg">
-              Assistant Professor at University of Florida • Counselor Education • AI & Mental Health
+              Assistant Professor at University of Florida • Irving and Rose Fien Endowed Professorship • Counselor Education • AI & Mental Health  • AI for Counseling
             </p>
             <p className="mt-4 text-black max-w-2xl">
               I study how AI can augment counseling and psychotherapy practice and counselor training to improve client mental health and student learning outcomes. My work bridges counseling practice, machine learning, and health policy.
@@ -127,12 +127,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Selected Media Appearances */}
+ {/* Selected Media Appearances */}
 <section id="media" className="py-16 border-t border-neutral-200">
   <div className="mx-auto max-w-6xl px-4">
+    {/* Match Research heading */}
     <h2 className="text-2xl font-semibold text-black">Selected Media Appearances</h2>
 
-    <div className="mt-6 grid gap-6">
+    {/* Match Research grid */}
+    <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {[
         {
           outlet: "U.S. News & World Report",
@@ -189,21 +191,21 @@ export default function HomePage() {
           key={item.url}
           className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm"
         >
-          <h3 className="text-2xl font-semibold leading-tight text-black">
-            {item.title}
-          </h3>
+          {/* Match Research card typography (compact) */}
+          <h3 className="font-semibold text-black">{item.title}</h3>
 
-          <div className="mt-2 text-black">
+          <div className="mt-2 text-sm text-neutral-700">
             <span className="font-semibold">{item.outlet}</span>
+            <span className="mx-2 text-neutral-400">•</span>
+            <span>{item.year}</span>
           </div>
 
-          <div className="mt-2 text-black">{item.year}</div>
-
+          {/* Button present, but sized like Research cards */}
           <a
             href={item.url}
             target="_blank"
             rel="noreferrer"
-            className="mt-6 inline-flex items-center rounded-xl px-4 py-2 font-semibold text-white shadow-sm hover:opacity-90"
+            className="mt-4 inline-flex items-center rounded-xl px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90"
             style={{ background: "#FA4616" }} // UF Orange
           >
             View More &gt;&gt;
