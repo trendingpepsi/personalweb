@@ -127,6 +127,93 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Selected Media Appearances */}
+<section id="media" className="py-16 border-t border-neutral-200">
+  <div className="mx-auto max-w-6xl px-4">
+    <h2 className="text-2xl font-semibold text-black">Selected Media Appearances</h2>
+
+    <div className="mt-6 grid gap-6">
+      {[
+        {
+          outlet: "U.S. News & World Report",
+          year: "2025",
+          title: "AI Can’t Replace Therapists – But It Can Help Them",
+          url: "https://www.usnews.com/opinion/articles/2025-11-17/ai-mental-health-chatgpt-therapy-suicide-opinion",
+        },
+        {
+          outlet: "EdTech Magazine",
+          year: "2025",
+          title: "How AI Supports Student Mental Health in Higher Education",
+          url: "https://edtechmagazine.com/higher/how-ai-supports-student-mental-health-in-higher-education-perfcon",
+        },
+        {
+          outlet: "AL.com",
+          year: "2025",
+          title: "Is your college student at risk for anxiety? New UAB AI model can tell",
+          url: "https://www.al.com/educationlab/2025/02/is-your-college-student-at-risk-for-anxiety-depression-this-uab-ai-tool-can-tell.html",
+        },
+        {
+          outlet: "Medical Xpress",
+          year: "2025",
+          title:
+            "AI tool can help counselors predict which college students are at risk of anxiety and depression disorders",
+          url: "https://medicalxpress.com/news/2025-01-ai-tool-counselors-college-students.html",
+        },
+        {
+          outlet: "CBS WTVY",
+          year: "2025",
+          title: "Mental health leaders at UAB learning how AI can help with counseling",
+          url: "https://www.wtvy.com/2024/05/21/mental-health-leaders-uab-learning-how-ai-can-help-with-counseling/",
+        },
+        {
+          outlet: "The New York Times",
+          year: "2024",
+          title: "PTSD Has Surged Among College Students",
+          url: "https://www.nytimes.com/2024/05/30/health/ptsd-diagnoses-rising-college-students.html",
+        },
+        {
+          outlet: "TechTarget",
+          year: "2024",
+          title: "AI reveals mental health impact of COVID-19 vaccine rollout",
+          url: "https://www.techtarget.com/healthtechanalytics/news/366605413/AI-reveals-mental-health-impact-of-COVID-19-vaccine-rollout",
+        },
+        {
+          outlet: "News Medical",
+          year: "2024",
+          title:
+            "COVID-19 vaccine rollout phases linked to decreased anxiety and depression in US adults",
+          url: "https://www.news-medical.net/news/20240814/COVID-19-vaccine-rollout-phases-linked-to-decreased-anxiety-and-depression-in-US-adults.aspx",
+        },
+      ].map((item) => (
+        <article
+          key={item.url}
+          className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm"
+        >
+          <h3 className="text-2xl font-semibold leading-tight text-black">
+            {item.title}
+          </h3>
+
+          <div className="mt-2 text-black">
+            <span className="font-semibold">{item.outlet}</span>
+          </div>
+
+          <div className="mt-2 text-black">{item.year}</div>
+
+          <a
+            href={item.url}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-6 inline-flex items-center rounded-xl px-4 py-2 font-semibold text-white shadow-sm hover:opacity-90"
+            style={{ background: "#FA4616" }} // UF Orange
+          >
+            View More &gt;&gt;
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
       
       {/* Publications */}
       <section id="publications" className="py-16 border-t border-neutral-200">
