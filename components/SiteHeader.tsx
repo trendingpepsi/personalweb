@@ -31,6 +31,7 @@ export default function SiteHeader() {
         <nav className="hidden md:flex gap-6 text-sm">
           <a href="#about" className="font-semibold hover:opacity-70">About</a>
           <a href="#research" className="font-semibold hover:opacity-70">Research</a>
+          <a href="#media" className="font-semibold hover:opacity-70">Media</a>
           <a href="#publications" className="font-semibold hover:opacity-70">Publications</a>
           <a
             href="/ai-client"
@@ -101,6 +102,17 @@ export default function SiteHeader() {
                 Research
               </a>
             </li>
+           
+             <li>
+              <a
+                href="/#media"
+                className="block rounded-lg px-3 py-2 font-semibold hover:bg-white/10"
+                onClick={() => setOpen(false)}
+              >
+                Media
+              </a>
+            </li>
+            
             <li>
               <a
                 href="#publications"
