@@ -127,13 +127,11 @@ export default function HomePage() {
         </div>
       </section>
 
- {/* Selected Media Appearances */}
+{/* Selected Media Appearances */}
 <section id="media" className="py-16 border-t border-neutral-200">
   <div className="mx-auto max-w-6xl px-4">
-    {/* Match Research heading */}
     <h2 className="text-2xl font-semibold text-black">Selected Media Appearances</h2>
 
-    {/* Match Research grid */}
     <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {[
         {
@@ -151,20 +149,20 @@ export default function HomePage() {
         {
           outlet: "AL.com",
           year: "2025",
-          title: "Is your college student at risk for anxiety? New UAB AI model can tell",
+          title: "Is Your College Student at Risk for Anxiety? New UAB AI Model Can Tell",
           url: "https://www.al.com/educationlab/2025/02/is-your-college-student-at-risk-for-anxiety-depression-this-uab-ai-tool-can-tell.html",
         },
         {
           outlet: "Medical Xpress",
           year: "2025",
           title:
-            "AI tool can help counselors predict which college students are at risk of anxiety and depression disorders",
+            "AI Tool Can Help Counselors Predict Which College Students Are at Risk of Anxiety and Depression Disorders",
           url: "https://medicalxpress.com/news/2025-01-ai-tool-counselors-college-students.html",
         },
         {
           outlet: "CBS WTVY",
           year: "2025",
-          title: "Mental health leaders at UAB learning how AI can help with counseling",
+          title: "Mental Health Leaders at UAB Learning How AI Can Help with Counseling",
           url: "https://www.wtvy.com/2024/05/21/mental-health-leaders-uab-learning-how-ai-can-help-with-counseling/",
         },
         {
@@ -176,40 +174,48 @@ export default function HomePage() {
         {
           outlet: "TechTarget",
           year: "2024",
-          title: "AI reveals mental health impact of COVID-19 vaccine rollout",
+          title: "AI Reveals Mental Health Impact of COVID-19 Vaccine Rollout",
           url: "https://www.techtarget.com/healthtechanalytics/news/366605413/AI-reveals-mental-health-impact-of-COVID-19-vaccine-rollout",
         },
         {
           outlet: "News Medical",
           year: "2024",
           title:
-            "COVID-19 vaccine rollout phases linked to decreased anxiety and depression in US adults",
+            "COVID-19 Vaccine Rollout Phases Linked to Decreased Anxiety and Depression in US Adults",
           url: "https://www.news-medical.net/news/20240814/COVID-19-vaccine-rollout-phases-linked-to-decreased-anxiety-and-depression-in-US-adults.aspx",
         },
       ].map((item) => (
         <article
           key={item.url}
-          className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm"
+          className="group relative rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm hover:shadow-lg transition shadow-neutral-200/70"
         >
-          {/* Match Research card typography (compact) */}
-          <h3 className="font-semibold text-black">{item.title}</h3>
+          <div
+            className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(0,33,165,0.15), rgba(250,70,22,0.15))",
+            }}
+          />
+          <div className="relative">
+            <h3 className="font-semibold text-lg tracking-tight text-black">
+              {item.title}
+            </h3>
 
-          <div className="mt-2 text-sm text-neutral-700">
-            <span className="font-semibold">{item.outlet}</span>
-            <span className="mx-2 text-neutral-400">•</span>
-            <span>{item.year}</span>
+            <p className="mt-2 text-black text-sm">
+              <span className="font-semibold">{item.outlet}</span>
+              <span className="mx-2 text-neutral-400">•</span>
+              <span>{item.year}</span>
+            </p>
+
+            <a
+              href={item.url}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 inline-flex items-center text-sm font-semibold text-[#FA4616] hover:opacity-80"
+            >
+              View More <span aria-hidden className="ml-1">&gt;&gt;</span>
+            </a>
           </div>
-
-          {/* Button present, but sized like Research cards */}
-          <a
-            href={item.url}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-4 inline-flex items-center rounded-xl px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90"
-            style={{ background: "#FA4616" }} // UF Orange
-          >
-            View More &gt;&gt;
-          </a>
         </article>
       ))}
     </div>
